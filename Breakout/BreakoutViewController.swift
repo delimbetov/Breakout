@@ -18,17 +18,16 @@ class BreakoutViewController: UIViewController {
     //MARK: actions
     @IBAction func resetTouched(_ sender: UIBarButtonItem) {
         gameView.reset()
+        addPlayButton()
     }
     
     @objc private func pauseTouched(_ sender: UIBarButtonItem) {
         gameView.animate = false
-        navigationItem.rightBarButtonItem = nil
         addPlayButton()
     }
     
     @objc private func playTouched(_ sender: UIBarButtonItem) {
         gameView.animate = true
-        navigationItem.rightBarButtonItem = nil
         addPauseButton()
         
     }
@@ -50,10 +49,12 @@ class BreakoutViewController: UIViewController {
     }
     
     private func addPauseButton() {
+        navigationItem.rightBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(pauseTouched(_:)))
     }
     
     private func addPlayButton() {
+        navigationItem.rightBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playTouched(_:)))
     }
     
@@ -65,6 +66,7 @@ class BreakoutViewController: UIViewController {
         addPlayButton()
         gameView.reportScore = { [unowned self](score: Int) in  self.score = score }
         gameView.reset()
+        gameView.addGestureRecognizer(UIPanGestureRecognizer(target: gameView, action: #selector(GameSceneView.pan(_:))))
     }
     
     override func viewWillAppear(_ animated: Bool) {

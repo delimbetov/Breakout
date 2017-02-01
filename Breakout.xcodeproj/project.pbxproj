@@ -16,6 +16,7 @@
 		FA5EC4A91E3E245800BD5355 /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EC4A81E3E245800BD5355 /* GameSceneView.swift */; };
 		FA5EC4AB1E3E76D100BD5355 /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EC4AA1E3E76D100BD5355 /* BallView.swift */; };
 		FA5EC4AD1E3E918300BD5355 /* BreakoutBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EC4AC1E3E918300BD5355 /* BreakoutBehaviour.swift */; };
+		FA5EC4AF1E3E965D00BD5355 /* BrickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EC4AE1E3E965D00BD5355 /* BrickView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		FA5EC4A81E3E245800BD5355 /* GameSceneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
 		FA5EC4AA1E3E76D100BD5355 /* BallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
 		FA5EC4AC1E3E918300BD5355 /* BreakoutBehaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakoutBehaviour.swift; sourceTree = "<group>"; };
+		FA5EC4AE1E3E965D00BD5355 /* BrickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				FA5EC4991E3E1D4000BD5355 /* Main.storyboard */,
 				FA5EC4A81E3E245800BD5355 /* GameSceneView.swift */,
 				FA5EC4AC1E3E918300BD5355 /* BreakoutBehaviour.swift */,
+				FA5EC4AE1E3E965D00BD5355 /* BrickView.swift */,
 				FA5EC4AA1E3E76D100BD5355 /* BallView.swift */,
 				FA5EC4A71E3E1D6C00BD5355 /* Supporting files */,
 			);
@@ -159,6 +162,7 @@
 			files = (
 				FA5EC4981E3E1D4000BD5355 /* SettingsViewController.swift in Sources */,
 				FA5EC4A91E3E245800BD5355 /* GameSceneView.swift in Sources */,
+				FA5EC4AF1E3E965D00BD5355 /* BrickView.swift in Sources */,
 				FA5EC4941E3E1D4000BD5355 /* AppDelegate.swift in Sources */,
 				FA5EC4AB1E3E76D100BD5355 /* BallView.swift in Sources */,
 				FA5EC4AD1E3E918300BD5355 /* BreakoutBehaviour.swift in Sources */,

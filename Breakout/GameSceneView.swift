@@ -8,6 +8,12 @@
 
 import UIKit
 
+class Paddle: UIView {
+    override var collisionBoundsType: UIDynamicItemCollisionBoundsType {
+        return .ellipse
+    }
+}
+
 class GameSceneView: UIView {
     
     //MARK: public
@@ -23,14 +29,33 @@ class GameSceneView: UIView {
             }
             
             if animate {
-                //add behaviours
+                animator.addBehavior(behaviour)
+                behaviour.restoreLinearVelocity()
             } else {
-                //remove behaviours
+                behaviour.saveLinearVelocity()
+                animator.removeBehavior(behaviour)
             }
         }
     }
     
     var reportScore: ((Int) -> Void)?
+    
+    var xorigin = CGFloat()
+    func pan(_ gesture: UIPanGestureRecognizer) {
+        if true {
+            switch gesture.state {
+            case .began:
+                xorigin = gesture.location(in: paddle).x
+            case .changed:
+                //animate hack because you can't move view that is animated
+                animate = false
+                paddle.frame.origin.x += gesture.location(in: paddle).x - xorigin
+                animate = true
+            default:
+                break
+            }
+        }
+    }
     
     func reset() {
         animate = false
@@ -38,6 +63,8 @@ class GameSceneView: UIView {
         for subview in subviews {
             subview.removeFromSuperview()
         }
+        
+        behaviour.reset()
         
         load()
         reportScore?(0)
@@ -56,12 +83,18 @@ class GameSceneView: UIView {
     private lazy var animator: UIDynamicAnimator = {
         return UIDynamicAnimator(referenceView: self)
     }()
+    private let behaviour = BreakoutBehaviour()
+    private var paddle: Paddle!
     
     private func addBrick(withFrame frame: CGRect) {
-        let brick = UIView(frame: frame)
+        let brick = BrickView(frame: frame)
         
-        brick.backgroundColor = UIColor.red
+        brick.collapse = { [unowned self](brick: BrickView) in
+            self.behaviour.remove(item: brick)
+        }
+        brick.hitsTillCollapse = arc4random() % 2 + UInt32(1) //1...2
         addSubview(brick)
+        behaviour.add(item: brick)
     }
     
     private func load() {
@@ -79,6 +112,7 @@ class GameSceneView: UIView {
         ball.frame = CGRect(origin: origin, size: CGSize(width: Defaults.ballRadius * 2, height: Defaults.ballRadius * 2))
         ball.backgroundColor = UIColor.clear
         addSubview(ball)
+        behaviour.ball = ball
     }
     
     private func loadBricks() {
@@ -101,15 +135,16 @@ class GameSceneView: UIView {
     }
     
     private func loadPaddle() {
-        let paddle = UIView()
         var origin = CGPoint()
         
-        origin.x = (bounds.size.width - CGFloat(paddleWidth)) / 2
+        paddle = Paddle()
+        origin.x = (bounds.size.width - CGFloat(paddleWidth)) / 2 + 10
         origin.y = bounds.size.height - Defaults.paddleHeight - Defaults.paddleSpacing
         
         paddle.frame = CGRect(origin: origin, size: CGSize(width: CGFloat(paddleWidth), height: Defaults.paddleHeight))
         paddle.backgroundColor = UIColor.black
         addSubview(paddle)
+        behaviour.add(item: paddle)
     }
     
 }
