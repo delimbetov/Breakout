@@ -3,6 +3,20 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "BreakoutBehaviour.restoreBallVelocity(ball : BallView) -&gt; ():BreakoutBehaviour.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GameSceneView.pan(UIPanGestureRecognizer) -&gt; ():GameSceneView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "paddle.frame.origin">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BreakoutBehaviour.restoreLinearVelocity() -&gt; ():BreakoutBehaviour.swift">
+      </ContextState>
+      <ContextState
          contextName = "GameSceneView.loadBricks() -&gt; ():GameSceneView.swift">
          <PersistentStrings>
             <PersistentString
