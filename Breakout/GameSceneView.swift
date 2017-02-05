@@ -17,10 +17,25 @@ class Paddle: UIView {
 class GameSceneView: UIView {
     
     //MARK: public
-    var amountOfLines = 2
-    var bricksPerLine = 3
-    var paddleWidth = 50
-    var speedOfBall = 1
+    var bricksPerLine = 3 {
+        didSet {
+            if !started {
+                reset()
+            }
+        }
+    }
+    var instanteneousPush = true {
+        didSet {
+            behaviour.instanteneousPush = instanteneousPush
+        }
+    }
+    var paddleWidth = 50 {
+        didSet {
+            if !started {
+                reset()
+            }
+        }
+    }
     
     var animate = false {
         didSet {
@@ -29,6 +44,7 @@ class GameSceneView: UIView {
             }
             
             if animate {
+                started = true
                 animator.addBehavior(behaviour)
                 behaviour.restoreLinearVelocity()
             } else {
@@ -42,6 +58,7 @@ class GameSceneView: UIView {
     var reportScore: ((UInt32) -> Void)?
     
     func reset() {
+        started = false
         animate = false
         bricksLeft = 0
         score = 0
@@ -79,8 +96,15 @@ class GameSceneView: UIView {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        paddle.frame.origin.y = bounds.height - Defaults.paddleHeight - Defaults.paddleSpacing
+        behaviour.resetBoundaryBottom(frame: self.bounds)
+    }
+    
     //MARK: private
     private struct Defaults {
+        static let amountOfLines: UInt32 = 2
         static let ballRadius: CGFloat = 8
         static let brickHeight: CGFloat = 15
         static let bricksSpacing: CGFloat = 15
@@ -95,11 +119,13 @@ class GameSceneView: UIView {
         return UIDynamicAnimator(referenceView: self)
     }()
     private lazy var behaviour: BreakoutBehaviour = {
-        let behaviour = BreakoutBehaviour(frame: self.bounds)
+        let behaviour = BreakoutBehaviour()
         
+        behaviour.resetBoundaryBottom(frame: self.bounds)
         behaviour.reportBallHitBottom = {
             [unowned self]() in
             self.reportEndOfTheGame?(Result.lose)
+            behaviour.ball?.disappear()
         }
         
         return behaviour
@@ -109,6 +135,7 @@ class GameSceneView: UIView {
             //check for animate to exclude invoking from reset()
             if bricksLeft == 0 && animate {
                 reportEndOfTheGame?(Result.win)
+                behaviour.ball?.disappear()
             }
         }
     }
@@ -119,6 +146,7 @@ class GameSceneView: UIView {
             reportScore?(score)
         }
     }
+    private var started = false
     
     private func addBrick(withFrame frame: CGRect) {
         let brick = BrickView(frame: frame, hitsToCollapse: arc4random() % 2 + UInt32(1) /*1..2*/, brickIsHit: {
@@ -160,7 +188,7 @@ class GameSceneView: UIView {
     private func loadBricks() {
         let brickWidth = (bounds.size.width - Defaults.bricksSpacing * (CGFloat(bricksPerLine) + 1)) / CGFloat(bricksPerLine)
         
-        for lineNumber in 0..<amountOfLines {
+        for lineNumber in 0..<Defaults.amountOfLines {
             let y = Defaults.linesSpacing + CGFloat(lineNumber) * (Defaults.brickHeight + Defaults.linesSpacing)
             
             if y >= (bounds.size.height / 2 - Defaults.ballRadius - Defaults.brickHeight - 1) {

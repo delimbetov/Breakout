@@ -17,6 +17,7 @@
 		FA5EC4AB1E3E76D100BD5355 /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EC4AA1E3E76D100BD5355 /* BallView.swift */; };
 		FA5EC4AD1E3E918300BD5355 /* BreakoutBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EC4AC1E3E918300BD5355 /* BreakoutBehaviour.swift */; };
 		FA5EC4AF1E3E965D00BD5355 /* BrickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EC4AE1E3E965D00BD5355 /* BrickView.swift */; };
+		FA5EC4BB1E472BCE00BD5355 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5EC4BA1E472BCE00BD5355 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		FA5EC4AA1E3E76D100BD5355 /* BallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
 		FA5EC4AC1E3E918300BD5355 /* BreakoutBehaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakoutBehaviour.swift; sourceTree = "<group>"; };
 		FA5EC4AE1E3E965D00BD5355 /* BrickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickView.swift; sourceTree = "<group>"; };
+		FA5EC4BA1E472BCE00BD5355 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,13 +66,10 @@
 		FA5EC4921E3E1D4000BD5355 /* Breakout */ = {
 			isa = PBXGroup;
 			children = (
-				FA5EC4951E3E1D4000BD5355 /* BreakoutViewController.swift */,
-				FA5EC4971E3E1D4000BD5355 /* SettingsViewController.swift */,
+				FA5EC4BA1E472BCE00BD5355 /* TabBarController.swift */,
+				FA5EC4B31E47280300BD5355 /* Game */,
+				FA5EC4B21E4727F700BD5355 /* Settings */,
 				FA5EC4991E3E1D4000BD5355 /* Main.storyboard */,
-				FA5EC4A81E3E245800BD5355 /* GameSceneView.swift */,
-				FA5EC4AC1E3E918300BD5355 /* BreakoutBehaviour.swift */,
-				FA5EC4AE1E3E965D00BD5355 /* BrickView.swift */,
-				FA5EC4AA1E3E76D100BD5355 /* BallView.swift */,
 				FA5EC4A71E3E1D6C00BD5355 /* Supporting files */,
 			);
 			path = Breakout;
@@ -85,6 +84,26 @@
 				FA5EC4A11E3E1D4000BD5355 /* Info.plist */,
 			);
 			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		FA5EC4B21E4727F700BD5355 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FA5EC4971E3E1D4000BD5355 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		FA5EC4B31E47280300BD5355 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				FA5EC4951E3E1D4000BD5355 /* BreakoutViewController.swift */,
+				FA5EC4A81E3E245800BD5355 /* GameSceneView.swift */,
+				FA5EC4AC1E3E918300BD5355 /* BreakoutBehaviour.swift */,
+				FA5EC4AE1E3E965D00BD5355 /* BrickView.swift */,
+				FA5EC4AA1E3E76D100BD5355 /* BallView.swift */,
+			);
+			name = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5EC4981E3E1D4000BD5355 /* SettingsViewController.swift in Sources */,
+				FA5EC4BB1E472BCE00BD5355 /* TabBarController.swift in Sources */,
 				FA5EC4A91E3E245800BD5355 /* GameSceneView.swift in Sources */,
 				FA5EC4AF1E3E965D00BD5355 /* BrickView.swift in Sources */,
 				FA5EC4941E3E1D4000BD5355 /* AppDelegate.swift in Sources */,
@@ -330,6 +350,7 @@
 				FA5EC4A61E3E1D4000BD5355 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

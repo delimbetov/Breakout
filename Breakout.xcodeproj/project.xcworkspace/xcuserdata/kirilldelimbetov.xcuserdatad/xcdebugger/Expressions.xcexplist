@@ -6,10 +6,21 @@
          contextName = "BreakoutBehaviour.restoreBallVelocity(ball : BallView) -&gt; ():BreakoutBehaviour.swift">
       </ContextState>
       <ContextState
-         contextName = "GameSceneView.pan(UIPanGestureRecognizer) -&gt; ():GameSceneView.swift">
+         contextName = "GameSceneView.loadBricks() -&gt; ():GameSceneView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "paddle.frame.origin">
+               value = "bounds.size.width / CGFloat(bricksPerLine) - Defaults.bricksSpacing * (CGFloat(bricksPerLine) + 1)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingsViewController.bricksPerLineValueChanged(UIStepper) -&gt; ():SettingsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TabBarController.viewDidLoad() -&gt; ():TabBarController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewControllers">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -17,10 +28,10 @@
          contextName = "BreakoutBehaviour.restoreLinearVelocity() -&gt; ():BreakoutBehaviour.swift">
       </ContextState>
       <ContextState
-         contextName = "GameSceneView.loadBricks() -&gt; ():GameSceneView.swift">
+         contextName = "GameSceneView.pan(UIPanGestureRecognizer) -&gt; ():GameSceneView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "bounds.size.width / CGFloat(bricksPerLine) - Defaults.bricksSpacing * (CGFloat(bricksPerLine) + 1)">
+               value = "paddle.frame.origin">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

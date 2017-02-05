@@ -13,7 +13,7 @@ enum Result {
     case lose
 }
 
-class BreakoutViewController: UIViewController {
+class BreakoutViewController: UIViewController, SettingsDelegate {
 
     //MARK: public
     
@@ -34,7 +34,6 @@ class BreakoutViewController: UIViewController {
     @objc private func playTouched(_ sender: UIBarButtonItem) {
         gameView.animate = true
         addPauseButton()
-        
     }
     
     //MARK: private
@@ -105,6 +104,19 @@ class BreakoutViewController: UIViewController {
             })
     }
     
+    //MARK: SettingsDelegate
+    func bricksPerLine(newValue: Int) {
+        gameView.bricksPerLine = newValue
+    }
+    
+    func instanteneousPush(newValue: Bool) {
+        gameView.instanteneousPush = newValue
+    }
+    
+    func paddleWidth(newValue: Int) {
+        gameView.paddleWidth = newValue
+    }
+    
     //MARK: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,6 +141,12 @@ class BreakoutViewController: UIViewController {
         gameView.reset()
         gameView.addGestureRecognizer(UIPanGestureRecognizer(target: gameView, action: #selector(GameSceneView.pan(_:))))
         gameView.addGestureRecognizer(UITapGestureRecognizer(target: gameView, action: #selector(GameSceneView.tap(_:))))
+        
+        //app delegate
+        (UIApplication.shared.delegate! as! AppDelegate).callOnStatusBarFrameChange = {
+            [weak weakSelf = self] in
+            weakSelf?.view.layoutSubviews()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

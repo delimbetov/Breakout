@@ -10,9 +10,17 @@ import UIKit
 
 class BallView: UIView {
     
+    static let disappearTime = 2.0
     var fillingColor = UIColor.blue
     var lineWidth = 2
     var outlineColor = UIColor.black
+    
+    func disappear() {
+        UIView.animate(withDuration: BallView.disappearTime, animations: {
+            [unowned self] in
+            self.alpha = 0.0
+        })
+    }
     
     override func draw(_ rect: CGRect) {
         let origin = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)

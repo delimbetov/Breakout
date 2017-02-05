@@ -28,6 +28,7 @@ class BreakoutBehaviour: UIDynamicBehavior, UICollisionBehaviorDelegate {
         }
     }
     
+    var instanteneousPush = false
     var reportBallHitBottom: (() -> Void)?
     
     func add(item: UIDynamicItem) {
@@ -38,12 +39,16 @@ class BreakoutBehaviour: UIDynamicBehavior, UICollisionBehaviorDelegate {
     func instantaneousPush(from location: CGPoint) {
         guard let ball = ball else { print("integrity err push"); return }
         
-        let angle = atan2(location.x - ball.frame.origin.x, location.y - ball.frame.origin.y)
-        
-        print(location, ball.frame.origin, angle)
-        pushBehaviour.active = false
-        pushBehaviour.angle = -angle - CGFloat(M_PI) / 2
-        pushBehaviour.active = true
+        if instanteneousPush {
+            let angle = atan2(location.x - ball.frame.origin.x, location.y - ball.frame.origin.y)
+            
+            print(location, ball.frame.origin, angle)
+            pushBehaviour.active = false
+            pushBehaviour.angle = -angle - CGFloat(M_PI) / 2
+            pushBehaviour.active = true
+        } else {
+            print("instanteneousPush turned off")
+        }
     }
     
     func remove(item: UIDynamicItem) {
@@ -68,6 +73,13 @@ class BreakoutBehaviour: UIDynamicBehavior, UICollisionBehaviorDelegate {
         }
     }
     
+    func resetBoundaryBottom(frame: CGRect) {
+        let bottomLeft = CGPoint(x: frame.origin.x, y: frame.origin.y + frame.height)
+        let bottomRight = CGPoint(x: frame.origin.x + frame.width, y: frame.origin.y + frame.height)
+        
+        collision.addBoundary(withIdentifier: BreakoutBehaviour.boundaryBottom as NSCopying, from: bottomLeft, to: bottomRight)
+    }
+    
     func restoreLinearVelocity() {
         if let ball = ball, let savedlv = savedLinearVelocity {
             let curr = ballBehaviour.linearVelocity(for: ball)
@@ -85,16 +97,12 @@ class BreakoutBehaviour: UIDynamicBehavior, UICollisionBehaviorDelegate {
         }
     }
     
-    init(frame: CGRect) {
+    override init() {
         super.init()
-        
-        let bottomLeft = CGPoint(x: frame.origin.x, y: frame.origin.y + frame.height)
-        let bottomRight = CGPoint(x: frame.origin.x + frame.width, y: frame.origin.y + frame.height)
         
         collision.collisionDelegate = self
         addChildBehavior(ballBehaviour)
         addChildBehavior(collision)
-        collision.addBoundary(withIdentifier: BreakoutBehaviour.boundaryBottom as NSCopying, from: bottomLeft, to: bottomRight)
         addChildBehavior(itemBehaviour)
         addChildBehavior(pushBehaviour)
     }
