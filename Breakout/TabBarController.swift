@@ -16,6 +16,10 @@ class TabBarController: UITabBarController {
         let bvc = nvc.viewControllers[0] as! BreakoutViewController
         let svc = viewControllers![1] as! SettingsViewController
         
+        //to preload views
+        _ = bvc.view
+        _ = svc.view
+        
         svc.delegate = bvc
     }
 

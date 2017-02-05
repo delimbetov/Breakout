@@ -28,7 +28,7 @@ class BreakoutBehaviour: UIDynamicBehavior, UICollisionBehaviorDelegate {
         }
     }
     
-    var instanteneousPush = false
+    var instanteneousPush = true
     var reportBallHitBottom: (() -> Void)?
     
     func add(item: UIDynamicItem) {

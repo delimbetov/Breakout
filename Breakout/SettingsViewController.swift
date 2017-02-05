@@ -66,14 +66,5 @@ class SettingsViewController: UIViewController {
     @IBAction private func paddleWidthValueChanged(_ sender: UISegmentedControl) {
         delegate?.paddleWidth(newValue: segmentIndexToValue[SegmentIndex.init(rawValue: sender.selectedSegmentIndex)!]!)
     }
-
-    //MARK: UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let temp = delegate
-        
-        delegate = nil
-        delegate = temp
-    }
 }
 

@@ -66,6 +66,10 @@ class BreakoutViewController: UIViewController, SettingsDelegate {
     
     private func endGame(withText text: String) {
         let label = UILabel()
+        let alert = UIAlertController(title: "Game over", message: text, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
         
         UIView.animate(withDuration: Defaults.appearanceOfTextDuration, animations: {
             [unowned self] in
